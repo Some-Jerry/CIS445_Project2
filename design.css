@@ -1,0 +1,10 @@
+* {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    background-color: #009B77;
+}
+
+fieldset { 
+    margin: 0 auto;
+    border: black;
+}
