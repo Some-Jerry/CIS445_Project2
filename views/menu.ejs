@@ -1,0 +1,18 @@
+<body>
+
+    <h1>Test message from menu.ejs. Here will be the buttons that will take you to each operations .ejs file</h1>
+    <%if(name){%>
+    <p>Entered student name is:<%=name%></p>
+    <p>Entered student ID is:<%=id%></p>
+    <%}%>
+
+    <form method="POST" action="/register">
+        <label for="name"></label>
+        <input type="text" id="name" name="std_name" class="form"
+        placeholder="Enter student name">
+        <label for="id"></label>
+        <input type="number" id="id" name="std_id" class="form"
+        placeholder="Enter student ID">
+        <button>Submit</button>
+    </form>
+</body>
