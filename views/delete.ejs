@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Data</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+<body>
+    <h1>Delete Data</h1>
+
+    <form action="/delete" method="post">
+        <label for="table">Select a table:</label>
+        <select name="table" id="table">
+            <option value="department">Department</option>
+            <option value="student">Student</option>
+            <option value="instructor">Instructor</option>
+            <option value="advisor">Advisor</option>
+        </select> <br>
+
+        <label for="column">Select a column:</label>
+        <select name="column" id="column"></select> <br>
+
+        <label for="operator">Operator:</label>
+        <select name="operator" id="operator">
+            <option value=">">&gt;</option>
+            <option value=">=">&ge;</option>
+            <option value="=">=</option>
+            <option value="<=">&le;</option>
+            <option value="<">&lt;</option>
+        </select> <br>
+
+        <label for="value">Value:</label>
+        <input type="text" name="value" id="value" placeholder="e.g., 'value'"> <br>
+
+        <button type="submit">Delete Data</button>
+    </form>
+    
+    <script>
+        // Add an event listener to the "Select a table" dropdown
+        document.getElementById("table").addEventListener("change", function () {
+            const selectedTable = this.value;
+            const columnSelect = document.getElementById("column");
+
+            // Define columns for each table
+            const columns = {
+                department: ["building", "budget"],
+                student: ["name", "dept_name", "tot_credit"],
+                instructor: ["name", "dept_name", "salary"],
+                advisor: ["S_ID", "I_ID"],
+            };
+
+            // Populate the "Select a column" dropdown based on the selected table
+            columnSelect.innerHTML = '';
+            columns[selectedTable].forEach(function (column) {
+                const option = document.createElement("option");
+                option.value = column;
+                option.text = column;
+                columnSelect.appendChild(option);
+            });
+        });
+    </script>
+</body>
+</html>

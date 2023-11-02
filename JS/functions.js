@@ -1,5 +1,29 @@
-function Simplefun() 
+function insert() 
 {
-    document.getElementById("p1").innerHTML = "Changed made by externa JS";
+    // Function
 }
-    
+
+function update() 
+{
+    // Function
+}
+
+function remove() // aka Delete operation
+{
+    // Function
+}    
+
+function update() 
+{
+    // Function
+}
+
+function search() 
+{
+    // Function
+}
+
+function display() 
+{
+    // Function
+}

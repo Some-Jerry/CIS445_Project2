@@ -1,18 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
 
-    <h1>Test message from menu.ejs. Here will be the buttons that will take you to each operations .ejs file</h1>
-    <%if(name){%>
-    <p>Entered student name is:<%=name%></p>
-    <p>Entered student ID is:<%=id%></p>
-    <%}%>
-
-    <form method="POST" action="/register">
-        <label for="name"></label>
-        <input type="text" id="name" name="std_name" class="form"
-        placeholder="Enter student name">
-        <label for="id"></label>
-        <input type="number" id="id" name="std_id" class="form"
-        placeholder="Enter student ID">
-        <button>Submit</button>
-    </form>
+    <fieldset style="width: fit-content; text-align: center;">Please select your operation below<br><br>
+        <input type="button" id="insert" name="operation" value="insert" onclick="location.href='/insert'"><br><br>
+        <input type="button" id="update" name="operation" value="update" onclick="location.href='/update'"><br><br>
+        <input type="button" id="delete" name="operation" value="delete" onclick="location.href='/delete'"><br><br>
+        <input type="button" id="search" name="operation" value="search" onclick="location.href='/search'"><br><br>
+        <input type="button" id="display" name="operation" value="display" onclick="location.href='/display'"><br><br>
+        <br>
+    </fieldset>
+    
 </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Data</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+<body>
+
+<!-- The JavaScript code provided earlier should fetch the data for each table and pass it to this EJS template. 
+    The data for each table should be passed as arrays named departmentData, studentData, instructorData, and advisorData.-->
+
+    <h1>Display Data</h1>
+
+    <!-- Display the Department Table -->
+    <h2>Department Table</h2>
+    <table>
+        <tr>
+            <th>dept_name</th>
+            <th>building</th>
+            <th>budget</th>
+        </tr>
+        <% departmentData.forEach(function(row) { %>
+            <tr>
+                <td><%= row.dept_name %></td>
+                <td><%= row.building %></td>
+                <td><%= row.budget %></td>
+            </tr>
+        <% }); %>
+    </table>
+
+    <!-- Display the Student Table -->
+    <h2>Student Table</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>name</th>
+            <th>dept_name</th>
+            <th>tot_credit</th>
+        </tr>
+        <% studentData.forEach(function(row) { %>
+            <tr>
+                <td><%= row.ID %></td>
+                <td><%= row.name %></td>
+                <td><%= row.dept_name %></td>
+                <td><%= row.tot_credit %></td>
+            </tr>
+        <% }); %>
+    </table>
+
+    <!-- Display the Instructor Table -->
+    <h2>Instructor Table</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>name</th>
+            <th>dept_name</th>
+            <th>salary</th>
+        </tr>
+        <% instructorData.forEach(function(row) { %>
+            <tr>
+                <td><%= row.ID %></td>
+                <td><%= row.name %></td>
+                <td><%= row.dept_name %></td>
+                <td><%= row.salary %></td>
+            </tr>
+        <% }); %>
+    </table>
+
+    <!-- Display the Advisor Table -->
+    <h2>Advisor Table</h2>
+    <table>
+        <tr>
+            <th>S_ID</th>
+            <th>I_ID</th>
+        </tr>
+        <% advisorData.forEach(function(row) { %>
+            <tr>
+                <td><%= row.S_ID %></td>
+                <td><%= row.I_ID %></td>
+            </tr>
+        <% }); %>
+    </table>
+</body>
+</html>
