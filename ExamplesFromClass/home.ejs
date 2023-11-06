@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1 style="font-family: cursive;">The response is coming from home.EJS</h1>
+    <p>Currently there are <%=data%> students in the Student table</p>
+
+    <form method="POST" action="/register">
+        <input type="text" name="std_name" class="form" placeholder="Enter Student Name">
+        <input type="decimal" name="std_tot_credit" class="form" placeholder="Enter Total Credits">
+        <input type="text" name="std_dept_name" class="form" placeholder="Enter Department Name">
+        <button>Submit</button>
+    </form>
+    
+</body>
+</html>

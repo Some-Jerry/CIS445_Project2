@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="background-color:aquamarine;">Students
+        information</h1>
+        <table style='border: 0px;'>
+        <tr style='text-align:left; background-color:rgb(171, 154, 188)'>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Department Name</th>
+        <th>GPA</th>
+        </tr>
+        <% data.forEach(function(student){ %>
+        <tr style='text-align:left; background-color:rgb(231, 226, 237)'>
+        <td><%= student.ID %></td>
+        <td><%= student.name %></td>
+        <td><%=student.dept_name%></td>
+        <td><%=student.tot_credit%></td>
+        <% }) %>
+        </tr>
+        </table>
+</body>
+</html>
