@@ -1,3 +1,4 @@
+ // --- PACKAGE DECLARATIONS ETC. --- //
 var express = require('express');
 var app = express();
 var mysql = require('mysql');
@@ -11,7 +12,7 @@ var con = mysql.createConnection({
   database: 'cis445'
 });
 
-// Connect to the database
+// Connect to the database //
 con.connect((err) => {
   if (err) {
     console.error('Error connecting to the database:', err);
@@ -20,12 +21,12 @@ con.connect((err) => {
   console.log('Connected to the database');
 });
 
-// MENU
+// --- MENU --- //
 app.get("/menu", function (req, res) {
   res.render("menu", { name: req.body.std_name, id: req.body.std_id });
 });
 
-// DISPLAY
+// --- DISPLAY --- //
 app.get("/display", function(req, res) {
 
 
@@ -51,10 +52,6 @@ app.get("/display", function(req, res) {
 
 app.get("/delete", function (req, res) {
   res.render("delete");
-});
-
-app.get("/display", function (req, res) {
-  res.render("display");
 });
 
 // Push user to this page and show them data, or request for more data
