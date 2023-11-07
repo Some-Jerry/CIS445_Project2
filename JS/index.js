@@ -50,16 +50,67 @@ app.get("/display", function(req, res) {
 });});});});
 });
 
+// --- DELETE --- //
 app.get("/delete", function (req, res) {
   res.render("delete");
 });
 
-// Push user to this page and show them data, or request for more data
-app.post("/register", function (req, res) {
-  console.log(req.body.std_name);
-  console.log(req.body.std_id);
-  res.render("menu", { name: req.body.std_name, id: req.body.std_id });
+app.get("/deletedepartment", function (req, res) {
+  res.render("deletedepartment");
 });
+
+app.get("/deletedepartmentname", function (req, res) {
+  res.render("deletedepartmentname");
+});
+
+app.post("/delete", function(req, res) {
+
+  var info = { dept_name: req.body.std_dept_name};
+  var q = "DELETE FROM department WHERE ?";
+  var success = true;
+
+  con.query(q, info, function(error, results) {
+  if (error) throw err; 
+  
+  if (results.affectedRows == 0) success = false;
+
+  console.log(results);
+
+  if (success) res.redirect("/querysuccess"); // redirect to success page
+  else res.redirect("/queryfailure"); // redirect to error page, query failed
+});
+});
+
+app.get("/deletedepartmentbuilding", function (req, res) {
+  res.render("deletedepartmentbuilding");
+});
+
+app.get("/deletedepartmentbudget", function (req, res) {
+  res.render("deletedepartmentbudget");
+});
+
+app.get("/deleteinstructor", function (req, res) {
+  res.render("deleteinstructor");
+});
+
+app.get("/deletestudent", function (req, res) {
+  res.render("deletestudent");
+});
+
+app.get("/deleteadvisor", function (req, res) {
+  res.render("deleteadvisor");
+});
+
+// --- MISC --- //
+
+app.get("/querysuccess", function (req, res) {
+  res.render("querysuccess");
+});
+
+app.get("/queryfailure", function (req, res) {
+  res.render("queryfailure");
+});
+
 
 app.listen(8080, function () {
   console.log('App listening on port 8080!');
