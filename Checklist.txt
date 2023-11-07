@@ -1,0 +1,5 @@
+Insert operation & Display Pages
+Update operation & Display Pages
+Delete operation & Display Pages --> display pgae done, need functionality
+Search operation & Display Pages
+Display operation & Page --> DONE

@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 var mysql = require('mysql');
+app.set("view engine", "ejs"); // template engine
+var bodyparser = require("body-parser");
+app.use(bodyparser.urlencoded({ extended: true }));
 
 var con = mysql.createConnection({
   host: 'localhost',
@@ -17,70 +20,33 @@ con.connect((err) => {
   console.log('Connected to the database');
 });
 
-// Define a route to fetch data from the database
-app.get('/display', (req, res) => {
-  // Fetch data from the tables
-  const departmentQuery = 'SELECT * FROM department';
-  const studentQuery = 'SELECT * FROM student';
-  const instructorQuery = 'SELECT * FROM instructor';
-  const advisorQuery = 'SELECT * FROM advisor';
-
-  const departmentData = [];
-  const studentData = [];
-  const instructorData = [];
-  const advisorData = [];
-
-  con.query(departmentQuery, (err, departmentResults) => {
-    if (err) {
-      console.error('Error querying the department table:', err);
-      res.status(500).send('Error fetching data');
-      return;
-    }
-    departmentData.push(departmentResults);
-
-    con.query(studentQuery, (err, studentResults) => {
-      if (err) {
-        console.error('Error querying the student table:', err);
-        res.status(500).send('Error fetching data');
-        return;
-      }
-      studentData.push(studentResults);
-
-      con.query(instructorQuery, (err, instructorResults) => {
-        if (err) {
-          console.error('Error querying the instructor table:', err);
-          res.status(500).send('Error fetching data');
-          return;
-        }
-        instructorData.push(instructorResults);
-
-        con.query(advisorQuery, (err, advisorResults) => {
-          if (err) {
-            console.error('Error querying the advisor table:', err);
-            res.status(500).send('Error fetching data');
-            return;
-          }
-          advisorData.push(advisorResults);
-
-          res.render('display', {
-            departmentData,
-            studentData,
-            instructorData,
-            advisorData
-          });
-        });
-      });
-    });
-  });
-});
-
-app.set("view engine", "ejs"); // template engine
-var bodyparser = require("body-parser");
-app.use(bodyparser.urlencoded({ extended: true }));
-
-// Start here to enter the data you want
+// MENU
 app.get("/menu", function (req, res) {
   res.render("menu", { name: req.body.std_name, id: req.body.std_id });
+});
+
+// DISPLAY
+app.get("/display", function(req, res) {
+
+
+  var q1 = "select * from department;";
+  con.query(q1, function(error, departmentResult) {
+  if (error) throw error;
+
+  var q2 = "select * from student;";
+  con.query(q2, function(error, studentResult) {
+  if (error) throw error;
+
+  var q3 = "select * from instructor;";
+  con.query(q3, function(error, instructorResult) {
+  if (error) throw error;
+
+  var q4 = "select * from advisor;";
+  con.query(q4, function(error, advisorResult) {
+  if (error) throw error;
+  res.render("display", { studentData: studentResult, departmentData: departmentResult, advisorData: advisorResult, instructorData: instructorResult});
+  
+});});});});
 });
 
 app.get("/delete", function (req, res) {
