@@ -1,5 +1,5 @@
-Insert operation & Display Pages
+Insert operation & Display Pages --> Created pages, need to implement POST in index.js
 Update operation & Display Pages
-Delete operation & Display Pages --> display pgae done, need functionality
+Delete operation & Display Pages --> DONE, delete by budget / building / dept_name
 Search operation & Display Pages
-Display operation & Page --> DONE
+Display operation & Page --> DONE, displays all tables and rows
