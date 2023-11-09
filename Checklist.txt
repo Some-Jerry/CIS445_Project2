@@ -1,5 +1,5 @@
 Insert operation & Display Pages --> DONE, includes error handling for blank inserts
-Update operation & Display Pages
+Update operation & Display Pages --> Need to do update based on single attribute, make pages for each similar to delete scheme
 Delete operation & Display Pages --> DONE, delete by budget / building / dept_name
-Search operation & Display Pages -- > WIP, need to create searchsuccess / searchfailure pages and display data that was found by search
+Search operation & Display Pages -- > DONE, able to search each table by any field, handles empty fields
 Display operation & Page --> DONE, displays all tables and rows

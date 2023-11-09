@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            background-color: aquamarine;
+        }
+        table {
+            border: 0;
+        }
+        th {
+            text-align: left;
+            background-color: rgb(171, 154, 188);
+        }
+        tr:nth-child(odd) {
+            background-color: rgb(231, 226, 237);
+        }
+    </style>
+</head>
+<body>
+    <h1>Search for an advisor.</h1>
+    <h2>Advisor Table</h2>
+    <table>
+        <tr>
+            <th>S_ID</th>
+            <th>I_ID</th>
+        </tr>
+        <% advisorData.forEach(function(row) { %>
+            <tr>
+                <td><%= row.S_ID %></td>
+                <td><%= row.I_ID %></td>
+            </tr>
+        <% }); %>
+        </table>
+</body>
+</html>

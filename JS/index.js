@@ -497,9 +497,29 @@ app.get("/searchadvisor", function (req, res) {
   res.render("searchadvisor");
 });
 
-app.post("/searchAdvisor", function(req, res) {
-  var S_ID = req.body.std_S_ID;
-  var I_ID = req.body.std_I_ID;
+app.get("/searchsuccessadvisor", function (req, res) {
+  res.render("searchsuccessadvisor");
+});
+
+app.get("/searchsuccessstudent", function (req, res) {
+  res.render("searchsuccessstudent");
+});
+
+app.get("/searchsuccessinstructor", function (req, res) {
+  res.render("searchsuccessinstructor");
+});
+
+app.get("/searchsuccessdepartment", function (req, res) {
+  res.render("searchsuccessdepartment");
+});
+
+app.get("/searchfailure", function (req, res) {
+  res.render("searchfailure");
+});
+
+app.post("/searchadv", function(req, res) {
+  var S_ID = req.body.std_SID;
+  var I_ID = req.body.std_IID;
   var params = [S_ID, I_ID];
 
   var q = "SELECT * FROM advisor WHERE S_ID = ? AND I_ID = ?";
@@ -511,22 +531,23 @@ app.post("/searchAdvisor", function(req, res) {
 
   else if (I_ID == "")
   {
-    q = "SELECT * FROM advisor WHERE S_ID ?";
+    q = "SELECT * FROM advisor WHERE S_ID = ?";
     params = S_ID;
   }
 
   else if (S_ID == "")
   {
-    q = "SELECT * FROM advisor WHERE I_ID ?";
+    q = "SELECT * FROM advisor WHERE I_ID = ?";
     params = I_ID;
   }
+
 
   con.query(q, params, function(error, results) {
     if (error) throw err;
 
     if (results.length > 0) {
       // Match found
-      res.redirect("/searchsuccess"); // Redirect to a success page
+      res.render("searchsuccessadvisor", {advisorData: results}); // Redirect to a success page
     } else {
       // No match found
       res.redirect("/searchfailure"); // Redirect to an error page, no matching entry
@@ -534,9 +555,338 @@ app.post("/searchAdvisor", function(req, res) {
   });
 });
 
+app.post("/searchdept", function(req, res) {
+  var dept_name = req.body.std_dept;
+  var building = req.body.std_building;
+  var budget = req.body.std_budget;
+  var params = [dept_name, building, budget];
+
+  var q = "SELECT * FROM department WHERE dept_name = ? AND building = ? AND budget = ?";
+
+  if (dept_name == "" && building == "" && budget == "") 
+  {
+    q = "SELECT * FROM department";
+  }
+
+  else if (dept_name == "" && building == "")
+  {
+    q = "SELECT * FROM department WHERE budget = ?";
+    params = budget;
+  }
+
+  else if (dept_name == "" && budget =="")
+  {
+    q = "SELECT * FROM department WHERE building = ?";
+    params = building;
+  }
+
+  else if (building == "" && budget =="")
+  {
+    q = "SELECT * FROM department WHERE dept_name = ?";
+    params = dept_name;
+  }
+
+  else if (dept_name == "")
+  {
+    q = "SELECT * FROM department WHERE building = ? AND budget = ?";
+    params = [building, budget];
+  }
+
+  else if (building == "")
+  {
+    q = "SELECT * FROM department WHERE dept_name = ? AND budget = ?";
+    params = [dept_name, budget];
+  }
+
+  else if (budget == "")
+  {
+    q = "SELECT * FROM department WHERE dept_name = ? AND building = ?";
+    params = [dept_name, building];
+  }
+
+  con.query(q, params, function(error, results) {
+    if (error) throw err;
+
+    if (results.length > 0) {
+      // Match found
+      res.render("searchsuccessdepartment", {departmentData: results}); // Redirect to a success page
+    } else {
+      // No match found
+      res.redirect("/searchfailure"); // Redirect to an error page, no matching entry
+    }
+  });
+});
+
+app.post("/searchins", function(req, res) {
+  var ID = req.body.std_ID;
+  var name = req.body.std_name;
+  var dept_name = req.body.std_dept;
+  var salary = req.body.std_salary;
+  var params = [ID, name, dept_name, salary];
+
+  var q = "SELECT * FROM instructor WHERE ID = ? AND name = ? AND dept_name = ? AND salary = ?";
+
+  if (ID == "" && name == "" & dept_name == "" && salary == "") 
+  {
+    q = "SELECT * FROM instructor";
+  }
+
+  else if (ID == "" && name == "" & dept_name == "")
+  {
+    q = "SELECT * FROM instructor WHERE salary = ?";
+    params = salary;
+  }
+
+  else if (ID == "" && name == "" & salary == "")
+  {
+    q = "SELECT * FROM instructor WHERE dept_name = ?";
+    params = dept_name;
+  }
+
+  else if (ID == "" && dept_name == "" & salary == "")
+  {
+    q = "SELECT * FROM instructor WHERE name = ?";
+    params = name;
+  }
+
+  else if (name == "" && dept_name == "" & salary == "")
+  {
+    q = "SELECT * FROM instructor WHERE ID = ?";
+    params = ID;
+  }
+
+  else if (ID == "" && dept_name == "")
+  {
+    q = "SELECT * FROM instructor WHERE name = ? AND salary = ";
+    params = [name, salary];
+  }
+
+  else if (ID == "" && name == "")
+  {
+    q = "SELECT * FROM instructor WHERE dept_name = ? AND salary = ";
+    params = [dept_name, salary];
+  }
+
+  else if (ID == "" && salary == "")
+  {
+    q = "SELECT * FROM instructor WHERE dept_name = ? AND name = ";
+    params = [dept_name, name];
+  }
+
+  else if (name == "" && dept_name == "")
+  {
+    q = "SELECT * FROM instructor WHERE ID = ? AND salary = ";
+    params = [ID, salary];
+  }
+
+  else if (name == "" && salary == "")
+  {
+    q = "SELECT * FROM instructor WHERE ID = ? AND dept_name = ";
+    params = [ID, dept_name];
+  }
+
+  else if (dept_name == "" && salary == "")
+  {
+    q = "SELECT * FROM instructor WHERE dept_name = ? AND salary = ";
+    params = [dept_name, salary];
+  }
+
+  else if (ID == "")
+  {
+    q = "SELECT * FROM instructor WHERE name = ? AND dept_name = ? AND salary = ";
+    params = [name, dept_name, salary];
+  }
+
+  else if (name == "")
+  {
+    q = "SELECT * FROM instructor WHERE ID = ? AND dept_name = ? AND salary = ?";
+    params = [ID, dept_name, salary];
+  }
+
+  else if (dept_name == "")
+  {
+    q = "SELECT * FROM instructor WHERE ID = ? AND name = ? AND salary = ?";
+    params = [ID, name, salary];
+  }
+
+  else if (salary == "")
+  {
+    q = "SELECT * FROM instructor WHERE ID = ? AND dept_name = ? AND name = ?";
+    params = [ID, dept_name, name];
+  }
 
 
+  con.query(q, params, function(error, results) {
+    if (error) throw err;
 
+    if (results.length > 0) {
+      // Match found
+      res.render("searchsuccessinstructor", {instructorData: results}); // Redirect to a success page
+    } else {
+      // No match found
+      res.redirect("/searchfailure"); // Redirect to an error page, no matching entry
+    }
+  });
+});
+
+app.post("/searchstud", function(req, res) {
+  var ID = req.body.std_ID;
+  var name = req.body.std_name;
+  var dept_name = req.body.std_dept;
+  var tot_credit = req.body.std_credits;
+  var params = [ID, name, dept_name, tot_credit];
+
+  var q = "SELECT * FROM student WHERE ID = ? AND name = ? AND dept_name = ? AND tot_credit = ?";
+
+  if (ID == "" && name == "" & dept_name == "" && tot_credit == "") 
+  {
+    q = "SELECT * FROM student";
+  }
+
+  else if (ID == "" && name == "" & dept_name == "")
+  {
+    q = "SELECT * FROM student WHERE tot_credit = ?";
+    params = tot_credit;
+  }
+
+  else if (ID == "" && name == "" & tot_credit == "")
+  {
+    q = "SELECT * FROM student WHERE dept_name = ?";
+    params = dept_name;
+  }
+
+  else if (ID == "" && dept_name == "" & tot_credit == "")
+  {
+    q = "SELECT * FROM student WHERE name = ?";
+    params = name;
+  }
+
+  else if (name == "" && dept_name == "" & tot_credit == "")
+  {
+    q = "SELECT * FROM student WHERE ID = ?";
+    params = ID;
+  }
+
+  else if (ID == "" && dept_name == "")
+  {
+    q = "SELECT * FROM student WHERE name = ? AND tot_credit = ";
+    params = [name, tot_credit];
+  }
+
+  else if (ID == "" && name == "")
+  {
+    q = "SELECT * FROM student WHERE dept_name = ? AND tot_credit = ";
+    params = [dept_name, tot_credit];
+  }
+
+  else if (ID == "" && tot_credit == "")
+  {
+    q = "SELECT * FROM student WHERE dept_name = ? AND name = ";
+    params = [dept_name, name];
+  }
+
+  else if (name == "" && dept_name == "")
+  {
+    q = "SELECT * FROM student WHERE ID = ? AND tot_credit = ";
+    params = [ID, tot_credit];
+  }
+
+  else if (name == "" && tot_credit == "")
+  {
+    q = "SELECT * FROM student WHERE ID = ? AND dept_name = ";
+    params = [ID, dept_name];
+  }
+
+  else if (dept_name == "" && tot_credit == "")
+  {
+    q = "SELECT * FROM student WHERE dept_name = ? AND tot_credit = ";
+    params = [dept_name, tot_credit];
+  }
+
+  else if (ID == "")
+  {
+    q = "SELECT * FROM student WHERE name = ? AND dept_name = ? AND tot_credit = ";
+    params = [name, dept_name, tot_credit];
+  }
+
+  else if (name == "")
+  {
+    q = "SELECT * FROM student WHERE ID = ? AND dept_name = ? AND tot_credit = ?";
+    params = [ID, dept_name, tot_credit];
+  }
+
+  else if (dept_name == "")
+  {
+    q = "SELECT * FROM student WHERE ID = ? AND name = ? AND tot_credit = ?";
+    params = [ID, name, tot_credit];
+  }
+
+  else if (tot_credit == "")
+  {
+    q = "SELECT * FROM student WHERE ID = ? AND dept_name = ? AND name = ?";
+    params = [ID, dept_name, name];
+  }
+
+
+  con.query(q, params, function(error, results) {
+    if (error) throw err;
+
+    if (results.length > 0) {
+      // Match found
+      res.render("searchsuccessstudent", {studentData: results}); // Redirect to a success page
+    } else {
+      // No match found
+      res.redirect("/searchfailure"); // Redirect to an error page, no matching entry
+    }
+  });
+});
+
+// --- UPDATE --- //
+app.get("/update", function (req, res) {
+  res.render("update");
+});
+
+app.get("/updatedepartment", function (req, res) {
+  res.render("updatedepartment");
+});
+
+app.get("/updatestudent", function (req, res) {
+  res.render("updatestudent");
+});
+
+app.get("/updateinstructor", function (req, res) {
+  res.render("updateinstructor");
+});
+
+app.get("/updateadvisor", function (req, res) {
+  res.render("updateadvisor");
+});
+
+app.post("/updateadv", function(req, res) {
+var old_SID = req.body.std_oldSID;
+var new_SID = req.body.std_newSID;
+var old_IID = req.body.std_oldIID;
+var new_IID = req.body.std_newIID;
+
+  var params = [new_SID, old_SID, new_IID, old_IID];
+
+  var q = "UPDATE advisor SET S_ID = ? WHERE S_ID = ?; UPDATE advisor SET I_ID = ? WHERE I_ID = ?";
+  var success = true;
+
+  console.log(params);
+
+  con.query(q, params, function(error, results) {
+  if (error) throw error; 
+  
+  if (results.affectedRows == 0) success = false;
+
+  console.log(results);
+
+  if (success) res.redirect("/querysuccess"); // redirect to success page
+  else res.redirect("/queryfailure"); // redirect to error page, query failed
+
+});
+});
 
 // --- MISC --- //
 

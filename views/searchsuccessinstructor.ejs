@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            background-color: aquamarine;
+        }
+        table {
+            border: 0;
+        }
+        th {
+            text-align: left;
+            background-color: rgb(171, 154, 188);
+        }
+        tr:nth-child(odd) {
+            background-color: rgb(231, 226, 237);
+        }
+    </style>
+</head>
+<body>
+    <h1>Search for an Instructor.</h1>
+    <h2>Instructor Table</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>name</th>
+            <th>dept_name</th>
+            <th>salary</th>
+        </tr>
+        <% instructorData.forEach(function(row) { %>
+            <tr>
+                <td><%= row.ID %></td>
+                <td><%= row.name %></td>
+                <td><%= row.dept_name %></td>
+                <td><%= row.salary %></td>
+            </tr>
+        <% }); %>
+    </table>
+</body>
+</html>
