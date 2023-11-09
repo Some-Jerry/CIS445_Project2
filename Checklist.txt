@@ -1,5 +1,5 @@
-Insert operation & Display Pages --> Created pages, need to implement POST in index.js
+Insert operation & Display Pages --> DONE, includes error handling for blank inserts
 Update operation & Display Pages
 Delete operation & Display Pages --> DONE, delete by budget / building / dept_name
-Search operation & Display Pages
+Search operation & Display Pages -- > WIP, need to create searchsuccess / searchfailure pages and display data that was found by search
 Display operation & Page --> DONE, displays all tables and rows

@@ -378,6 +378,166 @@ app.get("/insertinstructor", function (req, res) {
   res.render("insertinstructor");
 });
 
+app.post("/insertadv", function(req, res) {
+
+  const min = 100000; 
+  const max = 999999; 
+
+  if (req.body.std_SID == "") req.body.std_SID = (Math.floor(Math.random() * (max - min + 1)) + min).toString;
+  if (req.body.std_IID == "") req.body.std_IID = (Math.floor(Math.random() * (max - min + 1)) + min).toString;
+  
+  var info = { S_ID: req.body.std_SID, I_ID: req.body.std_IID};
+  var q = "INSERT INTO advisor SET ?";
+  var success = true;
+
+  con.query(q, info, function(error, results) {
+  if (error); 
+  
+  if (results.affectedRows == 0) success = false;
+
+  console.log(results);
+
+  if (success) res.redirect("/querysuccess"); // redirect to success page
+  else res.redirect("/queryfailure"); // redirect to error page, query failed
+});
+});
+
+app.post("/insertins", function(req, res) {
+
+  const min = 100000; 
+  const max = 999999; 
+
+  if (req.body.std_ID == "") req.body.std_ID = (Math.floor(Math.random() * (max - min + 1)) + min).toString;
+  if (req.body.std_building == "") req.body.std_building = "none";
+  if (req.body.std_dept == "") req.body.std_dept = "none";
+  if (req.body.std_salary == "") req.body.std_salary = "0";
+
+  var info = { ID: req.body.std_ID, name: req.body.std_name, dept_name: req.body.std_dept, salary: req.body.std_salary};
+  var q = "INSERT INTO instructor SET ?";
+  var success = true;
+
+  con.query(q, info, function(error, results) {
+  if (error) throw err; 
+  
+  if (results.affectedRows == 0) success = false;
+
+  console.log(results);
+
+  if (success) res.redirect("/querysuccess"); // redirect to success page
+  else res.redirect("/queryfailure"); // redirect to error page, query failed
+});
+});
+
+app.post("/insertdept", function(req, res) {
+
+  if (req.body.std_budget == "") req.body.std_budget = "0";
+  if (req.body.std_building == "") req.body.std_building = "none";
+  if (req.body.std_dept == "") req.body.std_dept = "none";
+
+  var info = { dept_name: req.body.std_dept, building: req.body.std_building, budget: req.body.std_budget};
+  var q = "INSERT INTO department SET ?";
+  var success = true;
+
+  con.query(q, info, function(error, results) {
+  if (error) throw err; 
+  
+  if (results.affectedRows == 0) success = false;
+
+  console.log(results);
+
+  if (success) res.redirect("/querysuccess"); // redirect to success page
+  else res.redirect("/queryfailure"); // redirect to error page, query failed
+});
+});
+
+app.post("/insertstud", function(req, res) {
+
+  const min = 100000; 
+  const max = 999999; 
+
+  if (req.body.std_ID == "") req.body.std_ID = (Math.floor(Math.random() * (max - min + 1)) + min).toString;
+  if (req.body.std_building == "") req.body.std_building = "none";
+  if (req.body.std_dept == "") req.body.std_dept = "none";
+  if (req.body.std_credits == "") req.body.std_credits = "0";
+
+  var info = { ID: req.body.std_ID, name: req.body.std_name, dept_name: req.body.std_dept, tot_credit: req.body.std_credits};
+  var q = "INSERT INTO student SET ?";
+  var success = true;
+
+  con.query(q, info, function(error, results) {
+  if (error) throw err; 
+  
+  if (results.affectedRows == 0) success = false;
+
+  console.log(results);
+
+  if (success) res.redirect("/querysuccess"); // redirect to success page
+  else res.redirect("/queryfailure"); // redirect to error page, query failed
+});
+});
+// --- SEARCH --- //
+
+app.get("/search", function (req, res) {
+  res.render("search");
+});
+
+app.get("/searchdepartment", function (req, res) {
+  res.render("searchdepartment");
+});
+
+app.get("/searchstudent", function (req, res) {
+  res.render("searchstudent");
+});
+
+app.get("/searchinstructor", function (req, res) {
+  res.render("searchinstructor");
+});
+
+app.get("/searchadvisor", function (req, res) {
+  res.render("searchadvisor");
+});
+
+app.post("/searchAdvisor", function(req, res) {
+  var S_ID = req.body.std_S_ID;
+  var I_ID = req.body.std_I_ID;
+  var params = [S_ID, I_ID];
+
+  var q = "SELECT * FROM advisor WHERE S_ID = ? AND I_ID = ?";
+
+  if (S_ID == "" && I_ID == "") 
+  {
+    q = "SELECT * FROM advisor";
+  }
+
+  else if (I_ID == "")
+  {
+    q = "SELECT * FROM advisor WHERE S_ID ?";
+    params = S_ID;
+  }
+
+  else if (S_ID == "")
+  {
+    q = "SELECT * FROM advisor WHERE I_ID ?";
+    params = I_ID;
+  }
+
+  con.query(q, params, function(error, results) {
+    if (error) throw err;
+
+    if (results.length > 0) {
+      // Match found
+      res.redirect("/searchsuccess"); // Redirect to a success page
+    } else {
+      // No match found
+      res.redirect("/searchfailure"); // Redirect to an error page, no matching entry
+    }
+  });
+});
+
+
+
+
+
 // --- MISC --- //
 
 app.get("/querysuccess", function (req, res) {
