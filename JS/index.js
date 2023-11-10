@@ -862,21 +862,18 @@ app.get("/updateadvisor", function (req, res) {
   res.render("updateadvisor");
 });
 
-app.post("/updateadv", function(req, res) {
-var old_SID = req.body.std_oldSID;
-var new_SID = req.body.std_newSID;
-var old_IID = req.body.std_oldIID;
-var new_IID = req.body.std_newIID;
+app.post("/deleteadvSID", function(req, res) {
 
-  var params = [new_SID, old_SID, new_IID, old_IID];
+  var oldSID = req.body.std_oldSID;
+  var newSID = req.body.std_newSID;
 
-  var q = "UPDATE advisor SET S_ID = ? WHERE S_ID = ?; UPDATE advisor SET I_ID = ? WHERE I_ID = ?";
+
+  var params = [newSID, oldSID];
+  var q = "UPDATE advsior SET S_ID = ? WHERE S_ID = ?;";
   var success = true;
 
-  console.log(params);
-
-  con.query(q, params, function(error, results) {
-  if (error) throw error; 
+  con.query(q, info, function(error, results) {
+  if (error) throw err; 
   
   if (results.affectedRows == 0) success = false;
 
@@ -884,7 +881,6 @@ var new_IID = req.body.std_newIID;
 
   if (success) res.redirect("/querysuccess"); // redirect to success page
   else res.redirect("/queryfailure"); // redirect to error page, query failed
-
 });
 });
 
