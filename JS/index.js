@@ -862,19 +862,35 @@ app.get("/updateadvisor", function (req, res) {
   res.render("updateadvisor");
 });
 
-app.post("/deleteadvSID", function(req, res) {
+app.post("/updateadv", function(req, res) {
 
-  var oldSID = req.body.std_oldSID;
-  var newSID = req.body.std_newSID;
+  var params = [req.body.std_newSID, req.body.std_newIID, req.body.std_oldSID, req.body.std_oldIID];
 
-
-  var params = [newSID, oldSID];
-  var q = "UPDATE advsior SET S_ID = ? WHERE S_ID = ?;";
+  var q = "UPDATE advisor SET S_ID = ?, I_ID = ? WHERE (S_ID = ? AND I_ID = ?)";
   var success = true;
 
-  con.query(q, info, function(error, results) {
+  con.query(q, params, function(error, results) {
   if (error) throw err; 
-  
+
+  if (results.affectedRows == 0) success = false;
+
+  console.log(results);
+
+  if (success) res.redirect("/querysuccess"); // redirect to success page
+  else res.redirect("/queryfailure"); // redirect to error page, query failed
+});
+});
+
+app.post("/updatedept", function(req, res) {
+
+  var params = [req.body.std_newdept, req.body.std_newbuilding, req.body.std_newbudget, req.body.std_olddept, req.body.std_oldbuilding, req.body.oldbudget];
+
+  var q = "UPDATE department SET dept_name = ?, building = ?, budget = ? WHERE (dept_name = ? AND building = ? AND budget = ?)";
+  var success = true;
+
+  con.query(q, params, function(error, results) {
+  if (error) throw err; 
+
   if (results.affectedRows == 0) success = false;
 
   console.log(results);

@@ -1,5 +1,5 @@
 Insert operation & Display Pages --> DONE, includes error handling for blank inserts
-Update operation & Display Pages --> Need to do update based on single attribute, make pages for each similar to delete scheme
+Update operation & Display Pages --> Test updatedept, finish updatestudent updateinstructor
 Delete operation & Display Pages --> DONE, delete by budget / building / dept_name
 Search operation & Display Pages -- > DONE, able to search each table by any field, handles empty fields
 Display operation & Page --> DONE, displays all tables and rows

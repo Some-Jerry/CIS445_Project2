@@ -7,11 +7,21 @@
 </head>
 <body>
     
-    <fieldset style="width: fit-content; text-align: center;">Please select an attribute to update based on.<br><br>
-        <input type="button" id="updateadvisorSID" name="operation" value="Student ID" onclick="location.href='/updateadvisorSID'"><br><br>
-        <input type="button" id="updateadvisorIID" name="operation" value="Instructor ID" onclick="location.href='/updateadvisorIID'"><br><br>
-        <br>
-    </fieldset>
 
+    <fieldset style="width: fit-content; text-align: center;">Please enter the major information to update.<br>
+        <form method="POST" action="/updateadv">
+                <h1> OLD INFORMATION</h1>
+            <p>Old S_ID</p>
+            <input type="text" name="std_oldSID" class="form" placeholder="e.g., 111222"><br>
+            <p>Old I_ID</p>
+            <input type="integer" name="std_oldIID" class="form" placeholder="e.g., 111222"><br>
+                <h2> NEW INFORMATION </h2>
+            <p>New S_ID</p>
+            <input type="text" name="std_newSID" class="form" placeholder="e.g., 111222"><br>
+            <p>New I_ID</p>
+            <input type="integer" name="std_newIID" class="form" placeholder="e.g., 111222"><br>
+            <button>Submit</button>
+        </form>
+    </fieldset>
 </body>
 </html>
