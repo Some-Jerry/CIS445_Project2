@@ -883,13 +883,53 @@ app.post("/updateadv", function(req, res) {
 
 app.post("/updatedept", function(req, res) {
 
-  var params = [req.body.std_newdept, req.body.std_newbuilding, req.body.std_newbudget, req.body.std_olddept, req.body.std_oldbuilding, req.body.oldbudget];
+  var params = [req.body.std_newdept, req.body.std_newbuilding, req.body.std_newbudget, req.body.std_olddept, req.body.std_oldbuilding, req.body.std_oldbudget];
 
   var q = "UPDATE department SET dept_name = ?, building = ?, budget = ? WHERE (dept_name = ? AND building = ? AND budget = ?)";
   var success = true;
 
   con.query(q, params, function(error, results) {
   if (error) throw err; 
+
+  if (results.affectedRows == 0) success = false;
+
+  console.log(results);
+
+  if (success) res.redirect("/querysuccess"); // redirect to success page
+  else res.redirect("/queryfailure"); // redirect to error page, query failed
+});
+});
+
+app.post("/updateins", function(req, res) {
+
+  var params = [req.body.std_newID, req.body.std_newname, req.body.std_newdept, req.body.std_newsalary, req.body.std_oldID, req.body.std_oldname, req.body.std_olddept, req.body.std_oldsalary];
+
+  var q = "UPDATE instructor SET ID = ?, name = ?, dept_name = ?, salary = ? WHERE (ID = ? AND name = ? AND dept_name = ? AND salary = ?)";
+  var success = true;
+
+  con.query(q, params, function(error, results) {
+  if (error) throw error; 
+
+  if (results.affectedRows == 0) success = false;
+
+  console.log(results);
+
+  if (success) res.redirect("/querysuccess"); // redirect to success page
+  else res.redirect("/queryfailure"); // redirect to error page, query failed
+});
+});
+
+app.post("/updatestud", function(req, res) {
+
+  var params = [req.body.std_newID, req.body.std_newname, req.body.std_newdept, req.body.std_newcredit, req.body.std_oldID, req.body.std_oldname, req.body.std_olddept, req.body.std_oldcredit];
+
+  var q = "UPDATE student SET ID = ?, name = ?, dept_name = ?, tot_credit = ? WHERE (ID = ? AND name = ? AND dept_name = ? AND tot_credit = ?)";
+  var success = true;
+
+  console.log(params);
+
+  con.query(q, params, function(error, results) {
+  if (error) throw error; 
 
   if (results.affectedRows == 0) success = false;
 

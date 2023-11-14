@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <fieldset style="width: fit-content; text-align: center;">Please enter the instructor information to update.<br>
+        <form method="POST" action="/updateins">
+                <h1> OLD INFORMATION</h1>
+            <p>Old ID</p>
+            <input type="int" name="std_oldID" class="form" placeholder="e.g., 111222"><br>
+            <p>Old name</p>
+            <input type="text" name="std_oldname" class="form" placeholder="e.g., John Smith"><br>
+            <p>Old dept_name</p>
+            <input type="text" name="std_olddept" class="form" placeholder="e.g., CS"><br>
+            <p>Old salary</p>
+            <input type="decimal" name="std_oldsalary" class="form" placeholder="e.g., 1000"><br>
+                <h2> NEW INFORMATION </h2>
+            <p>New dept_name</p>
+            <p>New ID</p>
+            <input type="int" name="std_newID" class="form" placeholder="e.g., 111222"><br>
+            <p>New name</p>
+            <input type="text" name="std_newname" class="form" placeholder="e.g., John Smith"><br>
+            <p>New dept_name</p>
+            <input type="text" name="std_newdept" class="form" placeholder="e.g., CS"><br>
+            <p>New salary</p>
+            <input type="decimal" name="std_newsalary" class="form" placeholder="e.g., 1000"><br>
+            <button>Submit</button>
+        </form>
+    </fieldset>
+</body>
+</html>
